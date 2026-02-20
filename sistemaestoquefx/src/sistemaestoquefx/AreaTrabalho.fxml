@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/imagens/fundo.png'); -fx-background-size: cover; -fx-background-position: center;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemaestoquefx.AreaTrabalhoController">
+   <top>
+      <MenuBar prefHeight="35.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Clientes">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#abrirTelaClientes" text="Controle de Clientes" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Funcionários">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#abrirTelaFuncionarios" text="Controle de Funcionários" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Fornecedores">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Controle de Fornecedores" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Produtos">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Controle de Estoque" />
+                <MenuItem mnemonicParsing="false" text="Consulta de Produtos" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Vendas">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Abrir PDV" />
+                  <MenuItem mnemonicParsing="false" text="Posição do Dia" />
+                  <MenuItem mnemonicParsing="false" text="Histórico de Vendas" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Configurações">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Trocar de Usuário" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sair">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Sair do Sistema" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="900.0" style="-fx-background-color: #f97316;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="30.0" prefWidth="14.0" />
+            <Label text="Usuário Logado: " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUsuarioLogado" text="Nome do Usuário" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <Pane BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

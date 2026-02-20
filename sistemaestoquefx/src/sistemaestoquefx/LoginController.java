@@ -3,10 +3,14 @@ package sistemaestoquefx;
 import br.com.sistema.dao.FuncionariosDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class LoginController {
 
@@ -28,19 +32,29 @@ public class LoginController {
             String email = txtEmail.getText();
             String senha = txtSenha.getText();
             
-            // Chama o nosso DAO atualizado
             FuncionariosDAO dao = new FuncionariosDAO();
-            dao.efetuarLogin(email, senha);
             
-            // Se passou da linha de cima sem dar erro, o login funcionou!
-            Alert alertaSucesso = new Alert(Alert.AlertType.INFORMATION);
-            alertaSucesso.setTitle("Sucesso!");
-            alertaSucesso.setHeaderText("Login aprovado!");
-            alertaSucesso.setContentText("A conexão com o MySQL deu certo. Em breve, a sua Tela Principal abrirá aqui.");
-            alertaSucesso.showAndWait();
+            // O DAO agora nos devolve uma String com o nome da pessoa!
+            String nomeDaPessoa = dao.efetuarLogin(email, senha);
+            
+            // 1. Fecha a tela de Login atual
+            Stage stageAtual = (Stage) btnEntrar.getScene().getWindow();
+            stageAtual.close();
+            
+            // 2. Carrega a Tela Principal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AreaTrabalho.fxml"));
+            Parent root = loader.load();
+            
+            // 3. O PASSE DE MÁGICA: Manda o nome para a Área de Trabalho
+            AreaTrabalhoController controller = loader.getController();
+            controller.exibirNomeUsuario(nomeDaPessoa);
+            
+            Stage stageAreaTrabalho = new Stage();
+            stageAreaTrabalho.setTitle("Painel de Controle - Sistema de Estoque");
+            stageAreaTrabalho.setScene(new Scene(root));
+            stageAreaTrabalho.show();
             
         } catch (Exception e) {
-            // Se o DAO lançar aquele erro de "senha inválida", ele cai aqui e mostra na tela
             Alert alertaErro = new Alert(Alert.AlertType.ERROR);
             alertaErro.setTitle("Erro de Autenticação");
             alertaErro.setHeaderText("Não foi possível acessar");
@@ -51,7 +65,6 @@ public class LoginController {
 
     @FXML
     void cancelarAction(ActionEvent event) {
-        // Fecha o sistema
         System.exit(0);
     }
 }

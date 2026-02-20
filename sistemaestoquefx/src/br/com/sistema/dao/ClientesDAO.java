@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.sistema.dao;
 
 import br.com.sistema.jdbc.ConexaoBanco;
@@ -13,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,11 +40,10 @@ public class ClientesDAO {
             stmt.setString(13, obj.getEstado());
             
             stmt.execute();
-            
             stmt.close();
-            JOptionPane.showMessageDialog(null, "Cliente Salvo com Sucesso!");
+            
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro no salvamento do cliente!"+erro);
+            throw new RuntimeException("Erro no salvamento do cliente: " + erro.getMessage());
         }
     }
     
@@ -75,11 +68,10 @@ public class ClientesDAO {
             stmt.setInt(14, obj.getId());
             
             stmt.execute();
-            
             stmt.close();
-            JOptionPane.showMessageDialog(null, "Cliente editado com Sucesso!");
+            
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao tentar editar o cliente!"+erro);
+            throw new RuntimeException("Erro ao tentar editar o cliente: " + erro.getMessage());
         }
     }
     
@@ -91,9 +83,8 @@ public class ClientesDAO {
             stmt.execute();
             stmt.close();
             
-            JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao tentar excluir o cliente!"+e);
+            throw new RuntimeException("Erro ao tentar excluir o cliente: " + e.getMessage());
         }
     }
     
@@ -123,10 +114,10 @@ public class ClientesDAO {
             return obj;
             
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null,"Erro ao buscar o cliente!"+ erro);
+            throw new RuntimeException("Erro ao buscar o cliente: " + erro.getMessage());
         }
-        return null;
     }
+    
     public Clientes BuscarClienteCPF(String cpf){
         try {
             String sql = "select * from tb_clientes where cpf =?";
@@ -153,74 +144,71 @@ public class ClientesDAO {
             return obj;
             
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null,"Erro ao buscar o cliente!"+ erro);
+            throw new RuntimeException("Erro ao buscar o cliente: " + erro.getMessage());
         }
-        return null;
     }
     
-public List<Clientes>Listar(){
-    List<Clientes> lista = new ArrayList<>();
-    try {
-        String sql = "select * from tb_clientes";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
-        
-        while(rs.next()){
-            Clientes obj = new Clientes();
+    public List<Clientes> Listar(){
+        List<Clientes> lista = new ArrayList<>();
+        try {
+            String sql = "select * from tb_clientes";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             
-            obj.setId(rs.getInt("id"));
-            obj.setNome(rs.getString("nome"));
-            obj.setRg(rs.getString("rg"));
-            obj.setCpf(rs.getString("cpf"));
-            obj.setEmail(rs.getString("email"));
-            obj.setTelefone(rs.getString("telefone"));
-            obj.setCelular(rs.getString("celular"));
-            obj.setCep(rs.getString("cep"));
-            obj.setEndereco(rs.getString("endereco"));
-            obj.setNumero(rs.getInt("numero"));
-            obj.setComplemento(rs.getString("complemento"));
-            obj.setBairro(rs.getString("bairro"));
-            obj.setCidade(rs.getString("cidade"));
-            obj.setEstado(rs.getString("estado"));
-            lista.add(obj);
+            while(rs.next()){
+                Clientes obj = new Clientes();
+                
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setEstado(rs.getString("estado"));
+                lista.add(obj);
+            }
+            return lista;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao criar a lista: " + e.getMessage());
         }
-        return lista;
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "erro ao criar a lista!"+e);
     }
-    return null;
-}
-public List<Clientes>Filtar(String nome){
-    List<Clientes> lista = new ArrayList<>();
-    try {
-        String sql = "select * from tb_clientes where nome like ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, nome);
-        ResultSet rs = stmt.executeQuery();
-        
-        while(rs.next()){
-            Clientes obj = new Clientes();
-            obj.setId(rs.getInt("id"));
-            obj.setNome(rs.getString("nome"));
-            obj.setRg(rs.getString("rg"));
-            obj.setCpf(rs.getString("cpf"));
-            obj.setEmail(rs.getString("email"));
-            obj.setTelefone(rs.getString("telefone"));
-            obj.setCelular(rs.getString("celular"));
-            obj.setCep(rs.getString("cep"));
-            obj.setEndereco(rs.getString("endereco"));
-            obj.setNumero(rs.getInt("numero"));
-            obj.setComplemento(rs.getString("complemento"));
-            obj.setBairro(rs.getString("bairro"));
-            obj.setCidade(rs.getString("cidade"));
-            obj.setEstado(rs.getString("estado"));
-            lista.add(obj);
+    
+    public List<Clientes> Filtar(String nome){
+        List<Clientes> lista = new ArrayList<>();
+        try {
+            String sql = "select * from tb_clientes where nome like ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Clientes obj = new Clientes();
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setEstado(rs.getString("estado"));
+                lista.add(obj);
+            }
+            return lista;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao criar a lista filtrada: " + e.getMessage());
         }
-        return lista;
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "erro ao criar a lista!"+e);
     }
-    return null;
-}
-
 }

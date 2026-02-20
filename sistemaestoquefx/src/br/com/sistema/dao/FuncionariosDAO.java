@@ -200,7 +200,7 @@ public class FuncionariosDAO {
         }
     }
 
-    public void efetuarLogin(String email, String senha) throws Exception {
+    public String efetuarLogin(String email, String senha) throws Exception {
         try {
             String sql = "select * from tb_funcionarios where email=? and senha=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -210,7 +210,8 @@ public class FuncionariosDAO {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                // Sucesso! O usuário existe.
+                // Sucesso! Retorna o nome da pessoa achada no banco
+                return rs.getString("nome");
             } else {
                 throw new Exception("E-mail ou senha inválidos. Tente novamente!");
             }
