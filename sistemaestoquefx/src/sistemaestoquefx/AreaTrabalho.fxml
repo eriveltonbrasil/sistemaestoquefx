@@ -30,8 +30,9 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Produtos">
               <items>
-                  <MenuItem mnemonicParsing="false" text="Controle de Estoque" />
-                <MenuItem mnemonicParsing="false" text="Consulta de Produtos" />
+                  <MenuItem mnemonicParsing="false" onAction="#abrirControleEstoque" text="Controle de Estoque" />
+                  <MenuItem mnemonicParsing="false" onAction="#abrirConsultaProdutos" text="Consulta de Produtos" />
+                  <MenuItem mnemonicParsing="false" onAction="#abrirFormularioProdutos" text="Formulário de Produtos" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Vendas">

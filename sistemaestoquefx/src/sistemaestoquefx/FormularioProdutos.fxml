@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F4F6F8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemaestoquefx.FormularioProdutosController">
+   <children>
+      <Pane prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #1A365D;">
+         <children>
+            <Label layoutX="32.0" layoutY="23.0" text="Cadastro de Produtos" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      <TabPane fx:id="tabPane" layoutX="14.0" layoutY="95.0" prefHeight="420.0" prefWidth="870.0" style="-fx-background-color: white; -fx-border-color: #e2e8f0;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Dados do Produto">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="24.0" layoutY="30.0" text="Código:"><font><Font size="14.0" /></font></Label>
+                        <TextField fx:id="txtCodigo" editable="false" layoutX="90.0" layoutY="27.0" prefHeight="25.0" prefWidth="100.0" />
+                        
+                        <Label layoutX="24.0" layoutY="80.0" text="Descrição:"><font><Font size="14.0" /></font></Label>
+                        <TextField fx:id="txtDescricao" layoutX="90.0" layoutY="77.0" prefHeight="25.0" prefWidth="400.0" />
+                        <Button layoutX="510.0" layoutY="77.0" mnemonicParsing="false" style="-fx-background-color: #e2e8f0;" text="Pesquisar" />
+
+                        <Label layoutX="24.0" layoutY="130.0" text="Preço:"><font><Font size="14.0" /></font></Label>
+                        <TextField fx:id="txtPreco" layoutX="90.0" layoutY="127.0" prefHeight="25.0" prefWidth="150.0" />
+
+                        <Label layoutX="270.0" layoutY="130.0" text="Qtd. Estoque:"><font><Font size="14.0" /></font></Label>
+                        <TextField fx:id="txtQtdEstoque" layoutX="365.0" layoutY="127.0" prefHeight="25.0" prefWidth="125.0" />
+
+                        <Label layoutX="24.0" layoutY="180.0" text="Fornecedor:"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <ComboBox fx:id="cbxFornecedor" layoutX="105.0" layoutY="177.0" prefHeight="25.0" prefWidth="385.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Consulta de Produtos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="24.0" layoutY="20.0" text="Descrição:">
+                           <font><Font size="14.0" /></font>
+                        </Label>
+                        <TextField fx:id="txtPesquisa" layoutX="95.0" layoutY="17.0" prefHeight="26.0" prefWidth="320.0" />
+                        <Button layoutX="430.0" layoutY="17.0" mnemonicParsing="false" onAction="#pesquisarAction" style="-fx-background-color: #1A365D;" text="Pesquisar" textFill="WHITE" />
+                        
+                        <TableView fx:id="tabelaProdutos" layoutX="14.0" layoutY="60.0" prefHeight="310.0" prefWidth="840.0">
+                          <columns>
+                            <TableColumn fx:id="colCodigo" prefWidth="80.0" text="Código" />
+                            <TableColumn fx:id="colDescricao" prefWidth="320.0" text="Descrição" />
+                            <TableColumn fx:id="colPreco" prefWidth="120.0" text="Preço" />
+                            <TableColumn fx:id="colQtdEstoque" prefWidth="120.0" text="Qtd. Estoque" />
+                            <TableColumn fx:id="colFornecedor" prefWidth="198.0" text="Fornecedor" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      
+      <HBox alignment="CENTER" layoutY="535.0" prefHeight="40.0" prefWidth="900.0" spacing="20.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#novoAction" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2563EB; -fx-font-weight: bold;" text="Novo" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#salvarAction" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #16a34a; -fx-font-weight: bold;" text="Salvar" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#editarAction" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #f59e0b; -fx-font-weight: bold;" text="Editar" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#excluirAction" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ef4444; -fx-font-weight: bold;" text="Excluir" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#relatorioAction" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #64748b; -fx-font-weight: bold;" text="Relatório" textFill="WHITE" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
