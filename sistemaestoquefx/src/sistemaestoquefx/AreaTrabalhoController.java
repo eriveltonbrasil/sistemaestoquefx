@@ -54,4 +54,20 @@ public class AreaTrabalhoController {
             System.out.println("Erro ao abrir a tela de funcionários: " + e.getMessage());
         }
     }
+    @FXML
+    void abrirTelaFornecedores(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioFornecedores.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Controle de Fornecedores");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Erro ao abrir a tela de fornecedores: " + e.getMessage());
+        }
+    }
 }

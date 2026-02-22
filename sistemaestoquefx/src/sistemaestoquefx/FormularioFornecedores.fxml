@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,11 +13,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F4F6F8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemaestoquefx.FormularioFuncionariosController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #F4F6F8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemaestoquefx.FormularioFornecedoresController">
    <children>
       <Pane prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #1A365D;">
          <children>
-            <Label layoutX="32.0" layoutY="23.0" text="Cadastro de Funcionários" textFill="WHITE">
+            <Label layoutX="32.0" layoutY="23.0" text="Cadastro de Fornecedores" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -28,7 +27,7 @@
       
       <TabPane fx:id="tabPane" layoutX="14.0" layoutY="95.0" prefHeight="420.0" prefWidth="870.0" style="-fx-background-color: white; -fx-border-color: #e2e8f0;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Dados Pessoais">
+          <Tab text="Dados do Fornecedor">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -70,25 +69,13 @@
                         <Label layoutX="760.0" layoutY="180.0" text="UF:"><font><Font size="14.0" /></font></Label>
                         <ComboBox fx:id="cbxEstado" layoutX="790.0" layoutY="177.0" prefHeight="25.0" prefWidth="80.0" />
 
-                        <Label layoutX="24.0" layoutY="230.0" text="RG:"><font><Font size="14.0" /></font></Label>
-                        <TextField fx:id="txtRg" layoutX="80.0" layoutY="227.0" prefHeight="25.0" prefWidth="150.0" />
-
-                        <Label layoutX="250.0" layoutY="230.0" text="CPF:"><font><Font size="14.0" /></font></Label>
-                        <TextField fx:id="txtCpf" layoutX="290.0" layoutY="227.0" prefHeight="25.0" prefWidth="150.0" />
-
-                        <Label layoutX="24.0" layoutY="280.0" text="Senha:"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <PasswordField fx:id="txtSenha" layoutX="80.0" layoutY="277.0" prefHeight="25.0" prefWidth="150.0" />
-
-                        <Label layoutX="250.0" layoutY="280.0" text="Nível:"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <ComboBox fx:id="cbxNivel" layoutX="290.0" layoutY="277.0" prefHeight="25.0" prefWidth="130.0" />
-                        
-                        <Label layoutX="440.0" layoutY="280.0" text="Cargo:"><font><Font name="System Bold" size="14.0" /></font></Label>
-                        <TextField fx:id="txtCargo" layoutX="490.0" layoutY="277.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="24.0" layoutY="230.0" text="CNPJ:"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <TextField fx:id="txtCnpj" layoutX="80.0" layoutY="227.0" prefHeight="25.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Consulta de Funcionários">
+          <Tab text="Consulta de Fornecedores">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -98,18 +85,18 @@
                         <TextField fx:id="txtPesquisa" layoutX="70.0" layoutY="17.0" prefHeight="26.0" prefWidth="320.0" />
                         <Button layoutX="410.0" layoutY="17.0" mnemonicParsing="false" onAction="#pesquisarAction" style="-fx-background-color: #1A365D;" text="Pesquisar" textFill="WHITE" />
                         
-                        <TableView fx:id="tabelaFuncionarios" layoutX="14.0" layoutY="60.0" prefHeight="310.0" prefWidth="840.0">
+                        <TableView fx:id="tabelaFornecedores" layoutX="14.0" layoutY="60.0" prefHeight="310.0" prefWidth="840.0">
                           <columns>
                             <TableColumn fx:id="colCodigo" prefWidth="50.0" text="Código" />
-                            <TableColumn fx:id="colNome" prefWidth="150.0" text="Nome" />
-                            <TableColumn fx:id="colCpf" prefWidth="110.0" text="CPF" />
+                            <TableColumn fx:id="colNome" prefWidth="200.0" text="Nome" />
+                            <TableColumn fx:id="colCnpj" prefWidth="130.0" text="CNPJ" />
                             <TableColumn fx:id="colEmail" prefWidth="180.0" text="E-mail" />
-                            <TableColumn fx:id="colNivel" prefWidth="100.0" text="Nível" />
-                            <TableColumn fx:id="colCargo" prefWidth="120.0" text="Cargo" />
+                            <TableColumn fx:id="colTelefone" prefWidth="110.0" text="Telefone" />
                             <TableColumn fx:id="colCelular" prefWidth="110.0" text="Celular" />
                             <TableColumn fx:id="colCep" prefWidth="80.0" text="CEP" />
                             <TableColumn fx:id="colEndereco" prefWidth="200.0" text="Endereço" />
                             <TableColumn fx:id="colNumero" prefWidth="60.0" text="Nº" />
+                            <TableColumn fx:id="colComplemento" prefWidth="100.0" text="Compl." />
                             <TableColumn fx:id="colBairro" prefWidth="120.0" text="Bairro" />
                             <TableColumn fx:id="colCidade" prefWidth="120.0" text="Cidade" />
                             <TableColumn fx:id="colUf" prefWidth="50.0" text="UF" />
