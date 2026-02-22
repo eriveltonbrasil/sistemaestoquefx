@@ -85,8 +85,18 @@ public class AreaTrabalhoController {
     
     @FXML
     void abrirControleEstoque(ActionEvent event) {
-        // Deixei preparado para quando criarmos a tela de Controle de Estoque!
-        System.out.println("Abrir tela de controle de estoque...");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioEstoque.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Controle de Estoque");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Erro ao abrir controle de estoque: " + e.getMessage());
+        }
     }
 
     // Método auxiliar (A Mágica acontece aqui)
@@ -108,6 +118,23 @@ public class AreaTrabalhoController {
             stage.show();
         } catch (Exception e) {
             System.out.println("Erro ao abrir a tela de produtos: " + e.getMessage());
+        }
+    }
+    @FXML
+    void abrirPDV(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FormularioVendas.fxml"));
+            Parent root = loader.load();
+            
+            // Para o PDV, geralmente queremos a tela maximizada
+            Stage stage = new Stage();
+            stage.setTitle("Ponto de Vendas");
+            stage.setScene(new Scene(root));
+            stage.setMaximized(true); // Abre em tela cheia
+            // stage.initModality(Modality.APPLICATION_MODAL); // Opcional no PDV
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Erro ao abrir o PDV: " + e.getMessage());
         }
     }
     
