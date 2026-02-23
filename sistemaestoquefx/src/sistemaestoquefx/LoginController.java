@@ -1,6 +1,10 @@
 package sistemaestoquefx;
 
 import br.com.sistema.dao.FuncionariosDAO;
+import br.com.sistema.jdbc.ConexaoBanco;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,17 +18,10 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-    @FXML
-    private TextField txtEmail;
-
-    @FXML
-    private PasswordField txtSenha;
-
-    @FXML
-    private Button btnEntrar;
-
-    @FXML
-    private Button btnCancelar;
+    @FXML private TextField txtEmail;
+    @FXML private PasswordField txtSenha;
+    @FXML private Button btnEntrar;
+    @FXML private Button btnCancelar;
 
     @FXML
     void entrarAction(ActionEvent event) {
@@ -34,8 +31,26 @@ public class LoginController {
             
             FuncionariosDAO dao = new FuncionariosDAO();
             
-            // O DAO agora nos devolve uma String com o nome da pessoa!
+            // O DAO nos devolve uma String com o nome da pessoa
             String nomeDaPessoa = dao.efetuarLogin(email, senha);
+            
+            // --- NOVA BUSCA PARA DESCOBRIR O NÍVEL DE ACESSO ---
+            String nivelAcesso = "Usuário"; // Por padrão, entra como restrito por segurança
+            try {
+                Connection conn = new ConexaoBanco().pegarConexao();
+                String sql = "SELECT nivel_acesso FROM tb_funcionarios WHERE email = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, email);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    nivelAcesso = rs.getString("nivel_acesso");
+                }
+                stmt.close();
+                conn.close();
+            } catch (Exception e) {
+                System.out.println("Erro ao buscar nível de acesso: " + e.getMessage());
+            }
+            // ---------------------------------------------------
             
             // 1. Fecha a tela de Login atual
             Stage stageAtual = (Stage) btnEntrar.getScene().getWindow();
@@ -45,9 +60,10 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AreaTrabalho.fxml"));
             Parent root = loader.load();
             
-            // 3. O PASSE DE MÁGICA: Manda o nome para a Área de Trabalho
+            // 3. O PASSE DE MÁGICA: Manda o NOME e o NÍVEL para a Área de Trabalho
             AreaTrabalhoController controller = loader.getController();
             controller.exibirNomeUsuario(nomeDaPessoa);
+            controller.configurarNivelDeAcesso(nivelAcesso); // <-- A TRAVA DE SEGURANÇA ACONTECE AQUI!
             
             Stage stageAreaTrabalho = new Stage();
             stageAreaTrabalho.setTitle("Painel de Controle - Sistema de Estoque");

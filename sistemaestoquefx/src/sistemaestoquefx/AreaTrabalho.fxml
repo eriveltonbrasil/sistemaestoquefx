@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/imagens/fundo.png'); -fx-background-size: cover; -fx-background-position: center;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemaestoquefx.AreaTrabalhoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/imagens/fundo.png'); -fx-background-size: cover; -fx-background-position: center;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistemaestoquefx.AreaTrabalhoController">
    <top>
       <MenuBar prefHeight="35.0" BorderPane.alignment="CENTER">
         <menus>
@@ -18,7 +18,7 @@
               <MenuItem mnemonicParsing="false" onAction="#abrirTelaClientes" text="Controle de Clientes" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Funcionários">
+          <Menu fx:id="menuFuncionarios" mnemonicParsing="false" text="Funcionários">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#abrirTelaFuncionarios" text="Controle de Funcionários" />
             </items>
@@ -38,18 +38,18 @@
             <Menu mnemonicParsing="false" text="Vendas">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#abrirPDV" text="Abrir PDV" />
-                  <MenuItem mnemonicParsing="false" text="Posição do Dia" />
-                  <MenuItem mnemonicParsing="false" text="Histórico de Vendas" />
+                  <MenuItem fx:id="menuItemPosicaoDia" mnemonicParsing="false" onAction="#abrirPosicaoDoDia" text="Posição do Dia" />
+                  <MenuItem fx:id="menuItemHistoricoVendas" mnemonicParsing="false" onAction="#abrirHistoricoVendas" text="Histórico de Vendas" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Configurações">
               <items>
-                <MenuItem mnemonicParsing="false" text="Trocar de Usuário" />
+                <MenuItem mnemonicParsing="false" onAction="#trocarUsuarioAction" text="Trocar de Usuário" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Sair">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Sair do Sistema" />
+                  <MenuItem mnemonicParsing="false" onAction="#sairDoSistemaAction" text="Sair do Sistema" />
                </items>
             </Menu>
         </menus>
